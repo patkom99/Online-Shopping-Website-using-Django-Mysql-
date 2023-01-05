@@ -1,0 +1,55 @@
+{%extends "master.html"%} 
+
+{% block "body" %}
+
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow ">
+                    <div class="card-body">
+                        {% if wishlist %} 
+                            {% for i in wishlist %} 
+                            <div class="row product_data mb-1">
+                                <div class="col-md-2 my-auto">
+                                    <img src="{{ i.product.product_image.url}}" height="70px" width="70px"  alt="">
+                                </div>
+                                <div class="col-md-3 my-auto">
+                                    <h6>{{i.product.name}}</h6>
+                                </div>
+                                <div class="col-md-2 my-auto">
+                                    <h6> Rs {{i.product.selling_price }}</h6>
+                                </div>
+                                
+
+                                <div class="col-md-3 my-auto">
+                                    <input type="hidden" class="prod_id" value="{{ i.product_id }}">
+                                    {% csrf_token %} 
+                                    <a href="{% url 'acc:productview' i.product.category.slug i.product.slug %}" class="btn btn-primary"> View Product </a>
+                                </div>
+
+                                <div class="col-md-2 my-auto">
+        
+                                    <a href="{% url 'acc:deletewishlist' i.id %}" class="btn btn-danger">Remove <i class="fa fa-trash"></i></a>
+                                </div>
+                            </div>
+                
+                            {% endfor %}
+                            <a href="{% url 'acc:checkout' %}" class="btn btn-outline-success float-end">Checkout</a>
+                        {% else %}
+                            <h4>Your wishlist is empty</h4>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><br><br><br><br><br>
+<br><br><br>
+
+
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock scripts %}

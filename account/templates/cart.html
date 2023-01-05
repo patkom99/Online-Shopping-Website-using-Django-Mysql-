@@ -1,0 +1,101 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="{%static 'css/main.css'%}">
+    <link rel="stylesheet" href="{%static 'css/manual.css'%}">
+    <!-- <script src="{%static 'js/jquery-3.6.3.min.js'%}"></script> -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+
+<body style="background-color: black;">
+    {% include 'navbar.html' %}
+
+    {% block "body"%}
+
+    <div class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card shadow ">
+                        <div class="card-body">
+                            {% if cart %} 
+                                {% for i in cart %} 
+                                <div class="row product_data mb-1">
+                                    <div class="col-md-2 my-auto">
+                                        <img src="{{ i.product.product_image.url}}" height="70px" width="70px"  alt="">
+                                    </div>
+                                    <div class="col-md-3 my-auto">
+                                        <h6>{{i.product.name}}</h6>
+                                    </div>
+                                    <div class="col-md-2 my-auto">
+                                        <h6> Rs {{i.product.selling_price }}</h6>
+                                    </div>
+                                    
+                                    <!-- <div class="col-md-3 my-auto">
+                                        <input type="hidden" value="{{ i.product_id }}" class="prod_id">
+                                        {% if i.product.quantity >= i.product_qty %} 
+                                        <label>Quantity</label> -->
+                                        <!-- <input type="number" name="quantity" class="form-control qty-input input-group" value="{{ i.product_qty }}"> -->
+                                        <!-- <h4>&nbsp;&nbsp;&nbsp;&nbsp;{{i.product_qty}}</h4>
+
+                                        {% else %} 
+                                        <h6>Out of stock</h6>
+                                        {% endif %}
+                                    </div> -->
+
+                                    <div class="col-md-3 my-auto">
+                                        <input type="hidden" class="prod_id" value="{{ i.product_id }}">
+                                        {% csrf_token %} 
+                                        {% if i.product.quantity >= i.product_qty %} 
+                                            <label for="Quantity">Quantity</label>
+                                            <div class="input-group text-center mb-3" style="width: 130px;">
+                                                <button class="input-group-text changeQuantity decrement-btn">-</button>
+                                                <input type="text" name="quantity" class="form-control qty-input text-center" value="{{i.product_qty}}">
+                                                <button class="input-group-text changeQuantity increment-btn">+</button>
+                                            </div>
+                                        {% else %} 
+                                        <h6>Out of stock</h6>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="col-md-2 my-auto">
+            
+                                        <a href="{% url 'acc:deletecart' i.id %}" class="btn btn-danger">Remove <i class="fa fa-trash"></i></a>
+                                    </div>
+                                </div>
+                    
+                                {% endfor %}
+                                <a href="{% url 'acc:checkout' %}" class="btn btn-outline-success float-end">Checkout</a>
+                            {% else %}
+                                <h4>Your cart is empty</h4>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><br><br><br><br><br>
+    <br><br><br>
+
+    {% endblock %}
+    {% include 'footer.html' %}
+    {%load static%}
+
+    <script src="{% static '/js/jquery-3.6.3.min.js' %}"></script>
+    <script src="{% static '/js/custom.js' %}"></script>
+    <script src="{%static '/js/main.js'%}"></script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    
+</body>

@@ -1,0 +1,138 @@
+{%load static%}
+
+<link rel="stylesheet" href="{%static 'css/main.css'%}">
+<link rel="stylesheet" href="{%static 'css/manual.css'%}">
+<style>
+    .box:before {
+        content: "";
+        z-index: -1;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: linear-gradient(-179deg, red 0%, #000000 100%);
+        transform: translate3d(0px, 20px, 0) scale(0.95);
+        filter: blur(20px);
+        opacity: var(0.7);
+        transition: opacity 0.3s;
+        border-radius: inherit;
+    }
+
+
+
+    /* 
+    * Prevents issues when the parent creates a 
+    * stacking context. (For example, using the transform
+    * property )
+    */
+    .box::after {
+        content: "";
+        z-index: -1;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: inherit;
+        border-radius: inherit;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg box" id="arrowup" style="background-color: black; margin-bottom: 0px; padding-bottom: 0px;">
+    <div class="container-fluid">
+        <a class="navbar-brand ms-3" href="#">
+            {%load static%}
+            <img src="static/images/brologo.jpg" alt="logo" width="130" height="64">
+        </a>
+
+        <div class="collapse navbar-collapse ms-3" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-1 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/"
+                        style="color: red; font-size: 20px;">Home</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link px-4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                        style="color: red; font-size: 20px;">
+                        Men's wear
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'acc:collections' %}">Categories</a></li>
+                        <!-- <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link px-3 disabled" style="color: red; font-size: 20px;">Accessories</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link px-3" href="#testimonial" style="color: red; font-size: 20px;">AboutUs</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact" style="color: red; font-size: 20px;">ContactUs</a>
+                </li>
+            </ul>
+            <form class="d-flex px-4" role="search">
+                <button class="btn btn-dark" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+                <input class="form-control border-dark" type="search" placeholder="Search" aria-label="Search"
+                    style="background-color: #1a1918;">
+            </form>
+            <ul class="navbar-nav ms-3">
+                <li class="nav-item dropdown">
+                    <a href="{% url 'acc:reg' %}" style="text-decoration: none; color:red;"></a>
+                    <i class="fa fa-user-circle-o mx-4 fs-5" aria-hidden="true" style="color: red;"></i>
+                    <h6>
+                        <label style="color: red;" class="nav-link mt-1 pt-1" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <h6 width="50" height="3">profile</h6>
+                        </label>
+
+                        <ul class="dropdown-menu ">
+                            {% if user.is_authenticated %}
+                            <li><a class="dropdown-item fw-semibold" href="{% url 'acc:myorders' %}">My orders</a></li>
+                            <li><a class="dropdown-item fw-semibold" href="{% url 'acc:edit' user.id %}">Edit Profile</a></li>
+                            <li><a class="dropdown-item text-danger fw-semibold" href="{% url 'acc:logout' %}">LOGOUT</a></li>
+                            
+                            {% else %}
+                            <li><a class="dropdown-item fw-semibold" href="{% url 'acc:loginpage' %}">LOGIN</a></li>
+
+                            <li><a class="dropdown-item fw-semibold" href="{% url 'acc:reg' %}">Create New Account</a></li>
+                            {% endif %}
+                        </ul>
+                    </h6>
+                </li>
+
+                <li class="nav-item">
+
+                    <a href="{% url 'acc:cart' %}"><i class="fa fa-shopping-cart fs-5 mx-1" width="22" height="30" style="color: red;" aria-hidden="true"></i>
+                    <br>
+                    <label style="color: red;" class="mt-1 pt-0">
+                        <h6 width="50" height="3" class="fs-6">cart</h6>
+                    </label>
+                </a>
+                </li>
+
+                <li class="nav-item">
+
+                <a href="{% url 'acc:wishlist' %}">
+                    <i class="fa fa-heart mx-4" aria-hidden="true" style="color: red;"></i>
+                    <br>
+                    <label style="color: red;"  class="mt-1 pt-0">
+                        <h6 width="50" height="3">&nbsp;&nbsp;wishlist</h6>
+                    </label>
+                </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

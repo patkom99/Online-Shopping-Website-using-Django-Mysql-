@@ -1,0 +1,286 @@
+/* carousel css */
+.home .home-banner-1,
+.home .home-banner-2{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 90% center;
+    min-height: 650px;
+    position: relative;
+}
+
+.home .home-banner-1{
+    background-image:url('../images/slide1.jpg');
+}
+
+.home .home-banner-2{
+    background-image:url('../images/slide2.jpg');
+}
+.home .home-banner .home-banner-text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-110%, -50%);
+}
+
+
+.home .home-banner .home-banner-text h1{
+    font-size: 6rem;
+}
+
+.home .carousel-indicators [data-bs-target]{
+    background-color: red;
+    width: 2.5rem;
+    height: 0.313rem;
+}
+
+.offers{
+    padding-top: 8.75rem;
+}
+
+.offers .offer-box .offer-image::before{
+    position: absolute;
+    content: "";
+    top: 0;
+    left: -100%;
+    z-index: 2;
+    display: block;
+    width: 50%;
+    height: 100%;
+    background: -webkit-linear-gradient(to right,rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 100%);
+    background: linear-gradient(to right,rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 100%);
+    transform: skewX(-25deg);
+    
+}
+
+.offers .offer-box .offer-image img{
+    transform: scale(1.02);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.offers .offer-box:hover .offer-image::before{
+    animation: effect_shine 1s;
+}
+@keyframes effect_shine{
+    100%{
+        left:150%;
+    }
+}
+
+.offers .offer-overlay::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: 1;
+}
+
+.offers .offer-box .offer-info{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    transition: all 250ms ease-out;
+    justify-content: center;
+    align-items: center;
+}
+
+.offers .offer-box .offer-info .heading-bigger{
+    font-size: 4.375rem;
+    line-height: 1;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-bottom: 0;
+    color: whitesmoke;
+}
+
+.offers .offer-box .offer-info .offer-title-1{
+    color: whitesmoke;
+    font-size: 1.125rem;
+    font-weight: 300;
+    margin-bottom: 0;
+    letter-spacing: 2px;
+}
+
+.testimonial{
+    padding:5rem 0 8rem;
+}
+.testimonial .testimonial-wrapper{
+    box-shadow: 0 0 0.563rem 0 red;
+    background:floralwhite;
+    margin:auto;
+    padding:1rem 5rem;
+    border:0.063rem solid whitesmoke;
+    border-radius: 0.625rem;
+}
+.testimonial .testimonial-wrapper img{
+    border-radius: 100%;
+    width:5rem;
+    height:5rem;
+    margin:1.25rem auto;
+    object-fit:cover;
+    background-color:white;
+    border:0.063rem solid whitesmoke;
+}
+
+.testimonial .testimonial-wrapper span{
+    color: red;
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin:1rem 0;
+    display:block;
+}
+.testimonial .testimonial-wrapper p{
+    color: red;
+    font-size: 0.875rem;
+    font-weight: 300;
+}
+.testimonial .carousel-indicators [data-bs-target]{
+    background-color: red;
+    width:2.5rem;
+    height:0.313rem;
+}
+
+.testimonial .carousel-indicators{
+    bottom:-3rem;
+}
+.testimonial .slider-icon{
+    font-size: 3rem;
+    font-weight: 600;
+    color: red;
+}
+.testimonial .carousel-control-prev{
+    left:-8.75rem;
+}
+.testimonial .carousel-control-next{
+    right:-8.75rem;
+}
+
+/* Contact CSS */
+.contact{
+    padding:4rem 0;
+    background-color: whitesmoke;
+}
+.contact .info li p a{
+    font-size: 1rem;
+    display:inline-block;
+    margin:0.75rem 0;
+    color: black;
+} 
+.contact .form-group{
+    margin-bottom:1.5rem;
+}
+.contact .form-control{
+    height:3.75rem;
+    padding:0.375rem 1.1875rem;
+    border:none;
+    font-size: 1rem;
+    box-shadow: 0 0.1875rem 1.25rem 0 rgba(218, 160, 160, 0.938);
+}
+.contact .textarea{
+    width:100%;
+    border-radius: 0.25rem;
+    padding:0.75rem 1.1875rem;
+    border:none;
+    font-size: 1rem;
+    margin-top:0.3125rem;
+    box-shadow: 0 0.1875rem 1.25rem 0 rgba(235, 198, 198, 0.938);
+}
+.contact .textarea:focus{
+    outline:none;
+    border:none;
+}
+
+/* Footer CSS */
+.copyright{
+    background: red;
+}
+.copyright p,
+.copyright a{
+    color: white;
+}
+
+/* Scroll Back To Top */
+#scrollUp{
+    position:fixed;
+    right:2%;
+    bottom:3%;
+    height:2.813rem;
+    width:2.5rem;
+    border-radius: 0.25rem;
+    text-align: center;
+    cursor:pointer;
+    z-index: 500;
+    display:none;
+    -webkit-transition:all 0.4s ease-in-out 0s;
+    transition:all 0.4s ease-in-out 0s;
+    background: red;
+    
+}
+
+.services {
+    margin-top: 10px;
+    padding: 10px;
+    text-align: justify;
+    box-shadow: 0px 1px 2px 2px grey;
+    transition-property: transfrom;
+    transition-duration: 3s;
+    border-radius: 25px;
+}
+
+.services:hover{
+    transform: scale(1.1);
+    transition: all 1500ms ease;
+}
+
+.category-image{
+    height: 300px;
+    width: 400px;
+    border-radius: 25px;
+}
+
+.products{
+    margin-top: 10px;
+    padding: 10px;
+    text-align: justify;
+    
+    transition-property: transfrom;
+    transition-duration: 3s;
+    height: 345px;
+    background-color: whitesmoke;
+    margin-bottom: 20px;
+}
+
+.products img{
+    background-color: whitesmoke;
+    height: 240px;
+    width: 200px;
+    padding-right: 5px;
+}
+
+.pname{
+    
+    padding-top: 0px;
+    margin-top: 0px;
+    padding-left: 10px;
+}
+
+.checkoutform label{
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.checkoutform input{
+    font-size: 14px;
+}
+

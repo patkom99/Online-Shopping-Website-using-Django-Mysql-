@@ -1,0 +1,136 @@
+{% extends "master.html" %}
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="{%static 'css/main.css'%}">
+    <link rel="stylesheet" href="{%static 'css/manual.css'%}">
+    <!-- <script src="{%static 'js/jquery-3.6.3.min.js'%}"></script> -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+
+<body style="background-color: black;">
+{% block "body" %}
+
+<div class="container mt-5">
+    <form action="{% url 'acc:placeorder' %}" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-7">
+                <div class="card ">
+                    <div class="card-body">
+                        <h6>Basic Details</h6>
+                        <hr>
+                        <div class="row checkoutform">
+                            <div class="col-md-6">
+                                <label for="">First Name</label>
+                                <input type="text" class="form-control" value="{{ request.user.first_name }}" name="fname" placeholder="Enter first name"
+                                    required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">Last Name</label>
+                                <input type="text" class="form-control" value="{{ request.user.last_name }}" name="lname" placeholder="Enter last name"
+                                    required>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Email</label>
+                                <input type="email" class="form-control" name="email" value="{{ request.user.email }}" placeholder="Enter Email"
+                                    required>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="">Phone</label>
+                                <input type="text" class="form-control" name="phone" value="{{ userprofile.phone }}" placeholder="Enter Phone" required>
+                            </div>
+                            <div class="col-md-12 mt-2">
+                                <label for="">Address</label>
+                                <textarea class="form-control" placeholder="Enter " name="address" required>{{ userprofile.address }}</textarea>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <label for="">City</label>
+                            <input type="text" class="form-control" placeholder="Enter City" name="city" value="{{ userprofile.city }}" required>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <label for="">State</label>
+                            <input type="text" class="form-control" placeholder="Enter State" name="state" value="{{ userprofile.state }}"  required>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <label for="">Country</label>
+                            <input type="text" class="form-control" placeholder="Enter Country" name="country" value="{{ userprofile.country }}"  required>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <label for="">Pin Code</label>
+                            <input type="text" class="form-control" placeholder="Enter Pin Code" name="pincode" value="{{ userprofile.pincode }}"  required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="card shadow shadow-secondary ">
+                <div class="card-body ">
+                    <h6>Order Summary</h6>
+                    <hr>
+                    {% if cartitems %} 
+                        <table class="table table-stripeds table-bordereds">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in cartitems %} 
+                                    <tr>
+                                        <td>
+                                            <img src="{{ item.product.product_image.url }}" height="50px" class="me-2" width="50px" alt="">
+                                            {{ item.product.name }}</td>
+                                        <td>{{ item.product_qty }}</td>
+                                        <td>{{ item.product.selling_price }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <h6>Grand Total
+                            <span class="float-end">Rs {{ total_price }}</span>
+                        </h6>
+                        <input type="hidden" value="COD" name="payment_mode">
+                        <div class="mt-3">
+                            <button type="submit" class="btn btn-success w-100"> COD | Place Order </button>
+                            <button type="button" class="btn btn-primary payWithRazorpay w-100 mt-2"> COD | Pay with Razorpay</button>
+                        </div>
+                    {% else %} 
+                        <h4>your cart is empty</h4>
+                    {% endif %}
+                </div>
+            </div>        
+        </div>
+    </div>
+</form>
+</div><br><br><br>
+{% endblock %}
+
+{% load static %}
+<script src="{% static '/js/jquery-3.6.3.min.js' %}"></script>
+<script src="{% static '/js/custom.js' %}"></script>
+<script src="{%static '/js/main.js'%}"></script>
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+{% block scripts %} 
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% endblock scripts %}
+<script src="{%static '/js/checkout.js'%}"></script>
+
+</body>

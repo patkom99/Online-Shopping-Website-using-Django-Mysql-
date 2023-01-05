@@ -1,0 +1,292 @@
+{%extends "master.html"%}
+
+<style>
+  .productshome {
+    margin-top: 10px;
+    padding: 10px;
+    text-align: justify;
+    height: 300px;
+    background-color: whitesmoke;
+    margin-bottom: 20px;
+  }
+
+  .productshome img {
+    background-color: whitesmoke;
+    height: 240px;
+    width: 200px;
+    padding-right: 5px;
+  }
+</style>
+
+{% block "body" %}
+{% include 'carousel.html' %}
+
+<div class="offers">
+  <div class="container mb-5">
+    <div class="row">
+      <div class="col-sm-6 col-lg-4 mb-lg-0 mb-4">
+        <a href="#">
+          <div class="offer-box text-center position-relative">
+            <div class="offer-inner">
+              <div class="offer-image position-relative overflow-hidden">
+                <img src="static/images/offer2.jpg" class="img-fluid" alt="">
+                <div class="offer-overlay"></div>
+              </div>
+              <div class="offer-info">
+                <div class="offer-info-inner">
+                  <p class="heading-bigger text-capitalize">sale 75%</p>
+                  <p class="offer-title-1 text-uppercase font-weight-bold">Don't miss this chance
+                  </p>
+                  <button type="button" class="btn btn-outline-danger text-uppercase mt-4">Shop
+                    Now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <!-- offer-box2 -->
+      <div class="col-lg-4 mb-lg-0 mb-4 d-flex flex-column justify-content-between">
+        <a href="#">
+          <div class="offer-box text-center position-relative mb-4 mb-sm-0 mb-lg-0">
+            <div class="offer-inner">
+              <div class="offer-image position-relative overflow-hidden">
+                <img src="static/images/offer5.jpg" class="img-fluid" alt="">
+                <div class="offer-overlay"></div>
+              </div>
+              <div class="offer-info">
+                <div class="offer-info-inner">
+                  <p class="heading-bigger text-capitalize">sale 75%</p>
+                  <p class="offer-title-1 text-uppercase font-weight-bold">Don't miss this chance
+                  </p>
+                  <button type="button" class="btn btn-outline-danger text-uppercase mt-4">Shop
+                    Now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a href="#">
+          <div class="offer-box text-center position-relative ">
+            <div class="offer-inner">
+              <div class="offer-image position-relative overflow-hidden">
+                <img src="static/images/offer4.jpg" class="img-fluid" alt="">
+                <div class="offer-overlay"></div>
+              </div>
+              <div class="offer-info">
+                <div class="offer-info-inner">
+                  <p class="heading-bigger text-capitalize">sale 75%</p>
+                  <p class="offer-title-1 text-uppercase font-weight-bold">Don't miss this chance
+                  </p>
+                  <button type="button" class="btn btn-outline-danger text-uppercase mt-4">Shop
+                    Now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- offer box three -->
+      <div class="col-sm-6 col-lg-4 mb-lg-0 mb-4">
+        <a href="#">
+          <div class="offer-box text-center position-relative">
+            <div class="offer-inner">
+              <div class="offer-image position-relative overflow-hidden">
+                <img src="static/images/offer2.jpg" class="img-fluid" alt="">
+                <div class="offer-overlay"></div>
+              </div>
+              <div class="offer-info">
+                <div class="offer-info-inner">
+                  <p class="heading-bigger text-capitalize">sale 75%</p>
+                  <p class="offer-title-1 text-uppercase font-weight-bold">Don't miss this chance
+                  </p>
+                  <button type="button" class="btn btn-outline-danger text-uppercase mt-4">Shop
+                    Now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="text-light text-center">Trending Products</h3>
+      <hr>
+      <div class="row ">
+        {% for i in trending_products %}
+        <div class="col-md-3 product_data item">
+          <div class="card mt-2">
+            <div class="card-body">
+              <a href="{% url 'acc:productview' i.category.slug i.slug %}" class="text-decoration-none">
+                <div class="productshome">
+                  <img src="{{ i.product_image.url }}" alt="" class="w-100">
+                </div>
+                <h4 class="text-center text-dark">{{ i.name }}</h4>
+              </a>
+              <span class="float-end fw-bold mt-1" style="color: #ed0528">Rs {{ i.selling_price }}</span>
+              <!-- <div class="row mt-2"> -->
+                {% csrf_token %}
+                <input type="hidden" value="{{ i.id }}" class="prod_id">
+                <input type="hidden" name="quantity" class="qty-input" value="1">
+                <!-- <div class="col-md-6 px-0"> -->
+                <span class="mb-2">
+                  {% if i.quantity > 0 %}
+                  <button type="button" class="btn btn-primary me-1 float-start btn-sm addToCartBtn">Cart <i
+                      class="fa fa-shopping-cart"></i> </button>
+                  {% else %}
+                  <button type="button" class="btn btn-danger me-1 btn-sm float-start disabled">Out of stock</button>
+                  {% endif %}
+                  <button type="button" class="btn btn-danger me-2 float-start btn-sm addToWishlist">Wishlist <i
+                      class="fa fa-heart"></i></button>
+                </span>
+              <!-- </div> -->
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- About Us -->
+<section id="testimonial" class="testimonial">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="headline text-center mb-5">
+          <h2 class="pb-3 position-relative d-inline-block" style="color: white; ">About Us</h2>
+        </div>
+      </div>
+      <div class="col-sm-12 col-lg-8 offset-lg-2 text-center">
+        <div id="carouselExampleIndicatorsTwo" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicatorsTwo" data-bs-slide-to="0" class="active"
+              aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicatorsTwo" data-bs-slide-to="1"
+              aria-label="Slide 2"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="testimonial-wrapper">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <img src="static/images/user.png" alt="" class="img-fluid">
+                  </div>
+                  <div class="username">
+                    <h3> Martin Johe, Co-Founder / CEO</h3>
+                    <span>BRO Men's Fashion</span>
+                    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                      labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                      laboris nisi ut aliquip ex ea commodo consequat. </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="testimonial-wrapper">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <img src="static/images/user2.png" alt="" class="img-fluid">
+                  </div>
+                  <div class="username">
+                    <h3> Martin Johe, Co-Founder / CEO</h3>
+                    <span>BRO Men's Fashion</span>
+                    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                      labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                      laboris nisi ut aliquip ex ea commodo consequat. </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicatorsTwo"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true">
+              <span class="ti-angle-left slider-icon"></span>
+            </span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicatorsTwo"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true">
+              <span class="ti-angle-right slider-icon"></span>
+            </span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- contactus -->
+<section id="contact">
+  <div class="contact">
+    <div class="container">
+      <div class="mb-5 text-center">
+        <h5>Lets Start a Conversation!</h5>
+        <h2 class="fw-bold">Contact Us</h2>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-5 col-md-5">
+          <h4 class="fw-bold">Contact Info</h4>
+          <ul class="info list-unstyled">
+            <li class="d-flex align-items-center">
+              <span class="pe-3 ti-location-pin fs-5"></span>
+              <p><a href="">Lorem ipsum dolor sit amet, consectetur.</a></p>
+            </li>
+            <li class="d-flex align-items-center">
+              <span class="pe-3 ti-mobile fs-5"></span>
+              <p><a href="">+91 999-999-9999</a></p>
+            </li>
+            <li class="d-flex align-items-center">
+              <span class="pe-3 ti-envelope fs-5"></span>
+              <p><a href="">Info@eshop.in</a></p>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-7 col-md-7 pt-lg-0 pt-md-0 pt-4">
+          <form>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="name" id="name" placeholder="Your name">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Email address">
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <input class="textarea" name="message" cols="30" rows="4" id="message"
+                    placeholder="Enter your message">
+                </div>
+              </div>
+              <div class="col-md-12">
+                <button class="btn btn-danger"><span class="ti-rocket pe-2 fs-5"></span> Send Message</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+{% endblock scripts %}
